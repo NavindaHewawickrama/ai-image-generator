@@ -1,5 +1,8 @@
 import styled, { ThemeProvider } from "styled-components";
 import {darkTheme} from "./utils/Theme"
+import Home from "./pages/Home";
+import CreatePost from "./pages/CreatePost";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -7,6 +10,9 @@ const Container = styled.div`
   height: 100%;
   background: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text_primary};
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition: all 0.2s ease;
 `;
 
 const Wrapper = styled.div`
@@ -23,7 +29,13 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <Container>
         <Wrapper>
-          Hello
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" exact element={<Home/>} />
+            </Routes>
+          </BrowserRouter>
+          <Home />
+          <CreatePost />
         </Wrapper>
       </Container>
     </ThemeProvider>
