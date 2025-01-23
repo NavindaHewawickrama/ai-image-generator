@@ -30,8 +30,8 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <Container>
         <Wrapper>
-          <Navbar />
           <BrowserRouter>
+          <Navbar />
             <Routes>
               <Route path="/" exact element={<Home/>} />
               <Route path="/post" exact element={<CreatePost/>} />

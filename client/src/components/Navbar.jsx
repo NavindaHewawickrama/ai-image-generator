@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "./button";
-import { AddRounded } from "@mui/icons-material";
+import { AddRounded, ExploreRounded } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Container = styled.div`
@@ -18,16 +18,32 @@ const Container = styled.div`
 `;
 
 const Navbar = () => {
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const path = location.pathname.split("/");
     return (
         <Container>
             Gen AI
-            <Button
-                text="Create New Post"
-                leftIcon={<AddRounded style={{ fontSize: '18px' }}
-                />}
-                onClick={() => Navigate("/post")}
-            />
+            {
+                path[1] === "post" ? (
+                    <Button
+                        onClick={() => navigate("/")}
+                        text={"Explore Posts"}
+                        leftIcon={<ExploreRounded style={{ fontSize: '18px' }} />}
+                        type={"secondary"}
+                    />
+                ) : (
+                    <Button
+                        onClick={() => navigate("/post")}
+                        text={"Create new post"}
+                        leftIcon={
+                            <AddRounded
+                                style={{ fontSize: '18px' }}
+                            />
+                        }
+                    />
+                )
+            }
         </Container>
     )
 }
