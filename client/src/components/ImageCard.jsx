@@ -96,4 +96,4 @@ const ImageCard = ({ item, heights }) => {
   );
 };
 
-export default ImageCard;
+export default ImageCard; 
