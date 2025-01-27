@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
-dotenv.config;
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -27,4 +27,29 @@ app.get("/", async (req,res) => {
         success: true,
         message: "Hello GFG Developers!!"
     });
-})
+});
+
+//function to connect to the database mongo db
+const connectDB = () => {
+    mongoose.set("strictQuery", true);
+    mongoose
+        .connect(process.env.MONGO_URI)
+        .then(() => console.log("MongoDB connected"))
+        .catch((err) =>{
+            console.error("Failed to connect to DB");
+            console.error(err);
+        })
+}
+
+
+//function to start the server
+const startServer = async () => {
+    try{
+        connectDB();
+        app.listen(8080, () => console.log("Server is running on port 8080"));
+    }catch(error){
+        console.log(error);
+    }
+}
+
+startServer();
